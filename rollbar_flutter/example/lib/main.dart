@@ -10,9 +10,7 @@ import 'package:rollbar_flutter/rollbar.dart' as rollbar;
 
 /// Example Flutter application using rollbar-flutter.
 Future<void> main() async {
-  const config = rollbar.Config(
-      accessToken: 'YOUR-ROLLBAR-ACCESSTOKEN',
-      package: 'rollbar_flutter_example');
+  const config = rollbar.Config(accessToken: 'YOUR-ROLLBAR-ACCESSTOKEN', package: 'rollbar_flutter_example');
 
   await RollbarFlutter.run(config, () {
     Rollbar.drop(rollbar.Breadcrumb.navigation(
@@ -25,7 +23,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -76,8 +74,7 @@ class MyHomePageState extends State<MyHomePage> {
     } on PlatformException catch (e, stackTrace) {
       batteryLevel = 'Failed to get battery level.';
       Rollbar.drop(
-        rollbar.Breadcrumb.error(
-            'Non-fatal PlatformException while getting battery level.'),
+        rollbar.Breadcrumb.error('Non-fatal PlatformException while getting battery level.'),
       );
       Rollbar.warn(e, stackTrace);
     }
